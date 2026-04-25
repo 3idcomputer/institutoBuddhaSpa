@@ -555,7 +555,6 @@ try {
     window.addEventListener('resize', updateCarousel);
   });
 </script>
-
 <script>
 document.getElementById('formContato').addEventListener('submit', function(e) {
   e.preventDefault();
@@ -567,31 +566,32 @@ document.getElementById('formContato').addEventListener('submit', function(e) {
   btn.disabled = true;
   btn.innerText = 'ENVIANDO...';
 
-  fetch('/enviar_email.php', {
+  fetch(window.location.origin + '/institutoBuddhaSpa/enviar_email.php', {
     method: 'POST',
     body: new FormData(form)
   })
-  .then(response => response.json())
-  .then(data => {
-    if (data.status === 'sucesso') {
-      retorno.innerHTML = `
-        <div style="background:#e8f7ee; color:#1b7f3a; padding:12px; border-radius:4px;">
-          ${data.mensagem}
-        </div>
-      `;
-      form.reset();
-    } else {
-      retorno.innerHTML = `
-        <div style="background:#fdecea; color:#b00020; padding:12px; border-radius:4px;">
-          ${data.mensagem}
-        </div>
-      `;
+  .then(async response => {
+    const texto = await response.text();
+
+    try {
+      return JSON.parse(texto);
+    } catch (e) {
+      throw new Error(texto);
     }
   })
-  .catch(() => {
+  .then(data => {
+    if (data.status === 'sucesso') {
+      retorno.innerHTML = `<div style="background:#e8f7ee;color:#1b7f3a;padding:12px;border-radius:4px;">${data.mensagem}</div>`;
+      form.reset();
+    } else {
+      retorno.innerHTML = `<div style="background:#fdecea;color:#b00020;padding:12px;border-radius:4px;">${data.mensagem}</div>`;
+    }
+  })
+  .catch(error => {
     retorno.innerHTML = `
-      <div style="background:#fdecea; color:#b00020; padding:12px; border-radius:4px;">
-        Erro ao enviar. Tente novamente.
+      <div style="background:#fdecea;color:#b00020;padding:12px;border-radius:4px;">
+        <strong>Erro técnico:</strong><br>
+        <pre style="white-space:pre-wrap;">${error.message}</pre>
       </div>
     `;
   })
