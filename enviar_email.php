@@ -55,13 +55,13 @@ try {
     $mail->isSMTP();
     $mail->Host       = 'smtp.gmail.com';
     $mail->SMTPAuth   = true;
-    $mail->Username   = 'contatoforminstitutobuddhaspa@gmail.com';
-    $mail->Password   = 'mzjqkfcwnhykgilk';
+    $mail->Username   = 'joaoalansilva@gmail.com';
+    $mail->Password   = 'SUA_SENHA_DE_APP_AQUI';
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
     $mail->Port       = 587;
 
-    $mail->setFrom('contatoforminstitutobuddhaspa@gmail.com', 'Contato Instituto Buddha Spa');
-    $mail->addAddress('amanda.teixeira@buddhaspa.com.br');
+    $mail->setFrom('joaoalansilva@gmail.com', 'Instituto Buddha Spa');
+    $mail->addAddress('joao.silva@buddhaspa.com.br', 'João Silva');
     $mail->addReplyTo($email, $nome);
 
     $mail->isHTML(true);
