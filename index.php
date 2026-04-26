@@ -566,10 +566,10 @@ document.getElementById('formContato').addEventListener('submit', function(e) {
   btn.disabled = true;
   btn.innerText = 'ENVIANDO...';
 
-  fetch(window.location.origin + '/institutoBuddhaSpa/enviar_email.php', {
-    method: 'POST',
-    body: new FormData(form)
-  })
+fetch('https://institutobuddhaspa.org/enviar_email.php', {
+  method: 'POST',
+  body: new FormData(form)
+})
   .then(async response => {
     const texto = await response.text();
 
