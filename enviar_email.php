@@ -1,4 +1,7 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 header('Content-Type: application/json; charset=utf-8');
 
@@ -55,13 +58,13 @@ try {
     $mail->isSMTP();
     $mail->Host       = 'smtp.gmail.com';
     $mail->SMTPAuth   = true;
-    $mail->Username   = 'joaoalansilva@gmail.com';
-    $mail->Password   = 'SUA_SENHA_DE_APP_AQUI';
+    $mail->Username   = 'contatoforminstitutobuddhaspa@gmail.com';
+    $mail->Password   = 'mzjqkfcwnhykgilk';
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
     $mail->Port       = 587;
 
-    $mail->setFrom('joaoalansilva@gmail.com', 'Instituto Buddha Spa');
-    $mail->addAddress('joao.silva@buddhaspa.com.br', 'João Silva');
+    $mail->setFrom('contatoforminstitutobuddhaspa@gmail.com', 'Contato Instituto Buddha Spa');
+    $mail->addAddress('amanda.teixeira@buddhaspa.com.br');
     $mail->addReplyTo($email, $nome);
 
     $mail->isHTML(true);
